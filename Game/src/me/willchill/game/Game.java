@@ -15,7 +15,7 @@ public class Game{
 	public static Game game;
 	public static GameKeyboard keyboard;
 	private String gameStats = " ";
-	private static Level level;
+	public static Level level;
 	
 	private void start(){
 		
@@ -31,9 +31,9 @@ public class Game{
 		
 		initGL();
 		keyboard = new GameKeyboard();
-		Entity.player = new Player("player", "res/entities/player.png", 400, 300, 5);
+		Entity.player = new Player("player", "res/entities/player.png", 400, 300, 1);
 		
-		level = new Level(200,20);
+		level = new Level(200,200);
 		
 		long lastTime = System.nanoTime();
 		long timer = System.currentTimeMillis();
@@ -82,7 +82,7 @@ public class Game{
 	
 	private void update() {
 		keyboard.pollInput();
-		
+
 		Entity.player.update();
 	}
 

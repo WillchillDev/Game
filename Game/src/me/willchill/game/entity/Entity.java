@@ -12,7 +12,7 @@ import org.newdawn.slick.opengl.TextureLoader;
 public class Entity {
 	
 	private String name = "UNNAMED ENTITY";
-	private float x, y;
+	public float x, y;
 	protected float speed;
 	private Texture texture = null;
 
