@@ -9,7 +9,7 @@ import me.willchill.game.level.tile.Tile;
 public class Level {
 	
 	private int width, height;
-	public int xoffset = 0, yoffset = 0;
+	public double xoffset = 0, yoffset = 0;
 	protected int[][] tiles;
 	private static final Random random = new Random();
 	

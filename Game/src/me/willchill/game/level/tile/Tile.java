@@ -29,7 +29,7 @@ public class Tile {
 		System.out.println("Tile " + name + " was created and a texture successfully loaded!");
 	}
 	
-	public void render(int x, int y){
+	public void render(double x, double y){
 		
 		if(this.texture == null){
 			System.out.println("ERROR: " + name + " has no loaded texture! Cannot render!");
@@ -37,11 +37,13 @@ public class Tile {
 		}
 		
 		this.texture.bind();
+		
+		
 		GL11.glBegin(GL11.GL_QUADS);
-		    GL11.glTexCoord2f(0, 1); GL11.glVertex2f(x * 16, y * 16); //Top-left
-		    GL11.glTexCoord2f(1, 1); GL11.glVertex2f(x * 16 + this.texture.getTextureWidth(), y * 16);//Top-right
-		    GL11.glTexCoord2f(1, 0); GL11.glVertex2f(x * 16 + this.texture.getTextureWidth(), y * 16 + this.texture.getTextureHeight());//Bottom-right
-		    GL11.glTexCoord2f(0, 0); GL11.glVertex2f(x * 16, y * 16 + this.texture.getTextureHeight());//Bottom-left
+		    GL11.glTexCoord2f(0, 1); GL11.glVertex2d(x * 16 * 3, y * 16 * 3); //Top-left
+		    GL11.glTexCoord2f(1, 1); GL11.glVertex2d((x * 16 + this.texture.getTextureWidth()) * 3, y * 16 * 3);//Top-right
+		    GL11.glTexCoord2f(1, 0); GL11.glVertex2d((x * 16 + this.texture.getTextureWidth()) * 3, (y * 16 + this.texture.getTextureHeight()) * 3);//Bottom-right
+		    GL11.glTexCoord2f(0, 0); GL11.glVertex2d(x * 16 * 3, (y * 16 + this.texture.getTextureHeight()) * 3);//Bottom-left
 		GL11.glEnd();
 	}
 	

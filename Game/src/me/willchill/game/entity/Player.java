@@ -48,7 +48,7 @@ public class Player extends Entity{
 	}
 	
 	public void playerMove(double x, double y){
-		Game.level.xoffset -= (int) x;
-		Game.level.yoffset -= (int) y;
+		Game.level.xoffset -= x;
+		Game.level.yoffset -= y;
 	}
 }
