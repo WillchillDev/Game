@@ -11,44 +11,36 @@ public class Player extends Entity{
 		super(name, texturePath, x, y, speed);
 	}
 	
-	public void checkPlayerMove(GameKeyboard keyboard){
+	public void update(){
 		
-		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_W) && keyboard.pressedKeys.contains((Integer) Keyboard.KEY_A)){
-			this.playerMove(-speed * Math.sqrt(0.5), speed * Math.sqrt(0.5));
-			return;
+		if(Game.game.updates % 10 == 0){   //Every 10 updates...
+			this.checkMove(Game.keyboard); //Check to see if the player has moved
 		}
-		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_W) && keyboard.pressedKeys.contains((Integer) Keyboard.KEY_D)){
-			this.playerMove(speed * Math.sqrt(0.5), speed * Math.sqrt(0.5));
-			return;
-		}
-		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_S) && keyboard.pressedKeys.contains((Integer) Keyboard.KEY_A)){
-			this.playerMove(-speed * Math.sqrt(0.5), -speed * Math.sqrt(0.5));
-			return;
-		}
-		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_S) && keyboard.pressedKeys.contains((Integer) Keyboard.KEY_D)){
-			this.playerMove(speed * Math.sqrt(0.5), -speed * Math.sqrt(0.5));
-			return;
-		}
+
+	}
+	
+	public void checkMove(GameKeyboard keyboard){
+		
 		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_W)){
-			this.playerMove(0, speed);
+			this.move(0, speed); //If the W key is pressed, move up.
 			return;
 		} 
 		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_A)){
-			this.playerMove(-speed, 0);
+			this.move(-speed, 0); //If the A key is pressed, move left.
 			return;
 		}
 		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_S)){
-			this.playerMove(0, -speed);
+			this.move(0, -speed); //If the S key is pressed, move down.
 			return;
 		}
 		if(keyboard.pressedKeys.contains((Integer) Keyboard.KEY_D)){
-			this.playerMove(speed, 0);
+			this.move(speed, 0); //If the D key is pressed, move right.
 			return;
 		}
 	}
 	
-	public void playerMove(double x, double y){
-		Game.level.xoffset -= x;
-		Game.level.yoffset -= y;
+	public void move(double x, double y){
+		Game.level.xoffset -= x; //Changes the render position of all of the tiles in the game relative to the x axis.
+		Game.level.yoffset -= y; //Changes the render position of all the tiles in the game relative to the y axis.
 	}
 }
