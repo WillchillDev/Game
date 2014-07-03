@@ -9,10 +9,11 @@ import org.newdawn.slick.opengl.TextureLoader;
 
 public class Entity {
 	
-	private String name = "UNNAMED ENTITY";
-	public float x, y;
+	protected String name = "UNNAMED ENTITY";
+	protected float x;
+	protected float y;
 	protected float speed; 
-	private Texture texture = null;
+	protected Texture texture = null;
 
 	public static Player player;
 	
@@ -55,5 +56,11 @@ public class Entity {
 		this.y += y;
 	}
 	
+	protected float getPositionX(){
+		return x;
+	}
 	
+	protected float getPositionY(){
+		return y;
+	}
 }

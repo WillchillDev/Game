@@ -2,20 +2,20 @@ package me.willchill.game;
 
 import me.willchill.game.entity.Entity;
 import me.willchill.game.entity.Player;
-import me.willchill.game.input.GameKeyboard;
 import me.willchill.game.level.Level;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.input.Keyboard;
 
-public class Game{
+public class Game {
 	
 	public static Game game;
-	public static GameKeyboard keyboard;
 	private String gameStats = " ";
-	public static Level level;
+	public Level level;
+	public int width = 800, height = 600;
 	
 	public int updates;
 	
@@ -23,7 +23,7 @@ public class Game{
 		
 		try{
 			//Window initialisation.
-			Display.setDisplayMode(new DisplayMode(800,600));
+			Display.setDisplayMode(new DisplayMode(width, height));
 			Display.create();
 			Display.setTitle("Game");
 			Display.setVSyncEnabled(true);
@@ -33,10 +33,9 @@ public class Game{
 		}
 		
 		initGL(); //Initialise OpenGL.
-		keyboard = new GameKeyboard(); //Initialise keyboard.
-		Entity.player = new Player("player", "res/entities/player.png", 400, 300, 1f); //Create player.
 		
-		level = new Level(200,200); //Initialise level.
+		level = new Level(256, 256); //Initialise level.
+		Entity.player = new Player("player", "res/entities/player.png", 0.5f); //Create player.
 		
 		//Fixed timestep code.
 		long lastTime = System.nanoTime();
@@ -64,9 +63,8 @@ public class Game{
 			
 			if(System.currentTimeMillis() - timer > 1000){
 				timer += 1000;
-				gameStats = "FPS: " + frames + ", UPS: " + updates;
+				gameStats = "FPS: " + frames + ", UPS: " + updates + ", Player X: " + Entity.player.getPositionX() + ", Y: " + Entity.player.getPositionY();;
 				Display.setTitle("Game " + gameStats);
-				System.out.println(gameStats);
 				updates = 0;
 				frames = 0;
 			}
@@ -85,8 +83,9 @@ public class Game{
 	}
 	
 	private void update() {
-		keyboard.pollInput();
+		Keyboard.poll();
 		Entity.player.update();
+		level.update();
 	}
 
 	public void initGL() {
